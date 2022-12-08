@@ -2,6 +2,11 @@
 
 .headline {
   font-family: "Mountains of Christmas";
+  color: lavenderblush;
+}
+
+.contrasted {
+  text-shadow: 5px 4px black;
 }
 
 .text {
