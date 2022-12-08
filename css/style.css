@@ -1,1 +1,9 @@
-/* @import url("https://raw.githack.com/shebtastic/xmas-coding-card/main/css/global.css"); */
+@import url("https://raw.githack.com/shebtastic/xmas-coding-card/main/css/global.css");
+
+.headline {
+  font-family: "Mountains of Christmas";
+}
+
+.text {
+  font-family: "Caveat";
+}
