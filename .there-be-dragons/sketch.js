@@ -98,7 +98,7 @@ const createCardFlip = () => {
 
 if (location.search.includes("?clickSelf=true")) {
   const click = () => {
-    const timeout = Math.random() * 15 * 1000 + Math.random() * 15000;
+    const timeout = Math.random() * 20000 + 10000;
     setTimeout(() => {
       document.body.click();
       click();
