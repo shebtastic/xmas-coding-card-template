@@ -96,4 +96,16 @@ const createCardFlip = () => {
   });
 };
 
+if (location.search.includes("?clickSelf=true")) {
+  const click = () => {
+    setTimeout(() => {
+      console.log("click!");
+      document.body.click();
+      click();
+    }, Math.random() * 30 * 1000);
+  };
+
+  click();
+}
+
 export { createSnowfall, createCardFlip };
