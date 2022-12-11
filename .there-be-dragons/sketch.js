@@ -84,15 +84,87 @@ const createSnowfall = ({
   speed = 1,
   wind = 0,
   angularMomentum = 0.7,
-}) => {
+} = {}) => {
   const element = document.querySelector(".card .front .snowfall");
   new p5(sketch(count, speed, wind, angularMomentum), element);
 };
 
-const createCardFlip = () => {
+const createCardFlip = ({duration = 800} = {}) => {
   document.addEventListener("click", () => {
-    const element = document.querySelector(".card");
-    element.classList.toggle("flipped");
+    const card = document.querySelector(".card");
+    const headline = document.querySelector(".headline")
+    const snowfall = document.querySelector(".snowfall")
+
+    if(!card.dataset.flipped || card.dataset.flipped === "false") {
+      card.dataset.flipped = "true"
+    } else {
+      card.dataset.flipped = "false"
+    }
+    
+    let starttime = null
+    let deg = null
+    let tick = 0
+
+    const flip = (timestamp) => {
+      if(!starttime) {
+        deg = 0
+        starttime = timestamp
+        requestAnimationFrame(flip)
+        return
+      }
+
+      const timingPosition = (timestamp - starttime) / duration
+      tick++
+
+      card.style = `transform: rotateY(${deg}deg)`
+      const rotation = 180 * (timingPosition / tick)
+      deg += rotation
+      if(deg + rotation >= 180) {
+        card.style = `transform: rotateY(180deg)`
+        return
+      }
+
+      if(deg - rotation > 90) {
+        headline.style = "z-index: -1"
+        snowfall.style = "z-index: -1"
+      }
+
+      requestAnimationFrame(flip)
+    }
+
+    const unflip = (timestamp) => {
+      console.log("unflip")
+      if(!starttime) {
+        deg = 180
+        starttime = timestamp
+        requestAnimationFrame(unflip)
+        return
+      }
+
+      const timingPosition = (timestamp - starttime) / duration
+      tick++
+
+      card.style = `transform: rotateY(${deg}deg)`
+      const rotation = 180 * (timingPosition / tick)
+      deg -= rotation
+      if(deg - rotation <= 0) {
+        card.style = `transform: rotateY(0deg)`
+        return
+      }
+
+      if(deg - rotation < 90) {
+        headline.style = "z-index: 1"
+        snowfall.style = "z-index: 2"
+      }
+
+      requestAnimationFrame(unflip)
+    }
+    
+    if(card.dataset.flipped === "true") {
+      requestAnimationFrame(flip)
+    } else {
+      requestAnimationFrame(unflip)
+    }
   });
 };
 
