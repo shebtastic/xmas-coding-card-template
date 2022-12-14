@@ -1,0 +1,94 @@
+@font-face {
+  font-family: "Mountains of Christmas";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/lib/fonts/Mountains_of_Christmas/MountainsofChristmas-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Caveat";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/lib/fonts/Caveat/Caveat-VariableFont_wght.ttf");
+}
+
+:root {
+  --width: 375px;
+  --height: 667px;
+  font-size: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  position: absolute;
+  width: calc(var(--width) + 1em);
+  height: calc(var(--height) + 1em);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  box-shadow: 2px 11px 26px 2px rgba(17, 17, 26, 0.12);
+}
+
+.card section {
+  position: absolute;
+  width: var(--width);
+  height: var(--height);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  z-index: 0;
+}
+
+
+.front {
+  background-color: #a9dfbf;
+}
+
+.back {
+  /* padding: 1em; */
+  background-color: antiquewhite;
+  transform: rotateY(180deg);
+}
+
+.snowfall canvas {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: var(--width) !important;
+  height: var(--height) !important;
+}
+
+.headline {
+  z-index: 2;
+  font-size: 3em;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+
+.postcardimage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
